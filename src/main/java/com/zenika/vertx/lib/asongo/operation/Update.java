@@ -33,7 +33,6 @@ public class Update extends BasicThenTemplate<Void> {
 	private final static MongoOperator OPERATOR = MongoOperator.UPDATE;
 
 	private final String collection;
-	private final AsongoConfiguration configuration;
 
 	private JsonObject query;
 	private JsonObject newDocument;
@@ -41,11 +40,11 @@ public class Update extends BasicThenTemplate<Void> {
 	private boolean multi = false;
 
 	public Update(AsongoConfiguration configuration, String collection, JsonObject query) {
+		super(OPERATOR, configuration);
 		if (collection == null || collection.isEmpty()) {
 			throw new IllegalArgumentException("A collection is required");
 		}
 
-		this.configuration = configuration;
 		this.collection = collection;
 		this.query = query;
 	}
@@ -86,13 +85,4 @@ public class Update extends BasicThenTemplate<Void> {
 		return command;
 	}
 
-	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
-	protected MongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

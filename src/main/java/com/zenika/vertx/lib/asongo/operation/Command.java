@@ -32,11 +32,10 @@ public class Command extends BasicThenTemplate<JsonObject> {
 private static final Logger LOGGER = LoggerFactory.getLogger(Command.class);
 
 	private final static MongoOperator OPERATOR = MongoOperator.COMMAND;
-	private final AsongoConfiguration configuration;
 	private final JsonObject command;
 
 	public Command(AsongoConfiguration configuration, JsonObject command) {
-		this.configuration = configuration;
+		super(OPERATOR, configuration);
 		this.command = command;
 	}
 
@@ -49,13 +48,4 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Command.class);
 		return command;
 	}
 
-	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
-	protected MongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

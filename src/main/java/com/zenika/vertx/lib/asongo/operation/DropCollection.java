@@ -29,19 +29,16 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
  */
 public class DropCollection extends BasicThenTemplate<Void> {
 
-private static final Logger LOGGER = LoggerFactory.getLogger(DropCollection.class);
-
 	private final static MongoOperator OPERATOR = MongoOperator.DROP_COLLECTION;
-	private final AsongoConfiguration configuration;
 	private final String collection;
 
 	public DropCollection(AsongoConfiguration configuration, String collection) {
 
+		super(OPERATOR, configuration);
 		if (collection == null || collection.isEmpty()) {
 			throw new IllegalArgumentException("A collection is required");
 		}
 
-		this.configuration = configuration;
 		this.collection = collection;
 	}
 
@@ -51,16 +48,6 @@ private static final Logger LOGGER = LoggerFactory.getLogger(DropCollection.clas
 		command.putString("action", OPERATOR.fieldName());
 		command.putString("collection",collection);
 		return command;
-	}
-
-	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
-	protected MongoOperator getOperator() {
-		return OPERATOR;
 	}
 
 }

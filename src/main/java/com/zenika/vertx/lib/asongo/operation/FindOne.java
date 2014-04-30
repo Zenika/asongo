@@ -30,7 +30,6 @@ public class FindOne<T> extends DocumentThenTemplate<T,T> {
 
 	private final static DocumentMongoOperator OPERATOR = DocumentMongoOperator.FINDONE;
 
-	private AsongoConfiguration configuration;
 	private final String collection;
 	private final JsonObject query;
 
@@ -39,11 +38,11 @@ public class FindOne<T> extends DocumentThenTemplate<T,T> {
 
 	public FindOne(AsongoConfiguration configuration, String collection, JsonObject query) {
 
+		super(OPERATOR, configuration);
 		if (collection == null || collection.isEmpty()) {
 			throw new IllegalArgumentException("A collection is required");
 		}
 
-		this.configuration = configuration;
 		this.collection = collection;
 		this.query = query;
 	}
@@ -77,17 +76,8 @@ public class FindOne<T> extends DocumentThenTemplate<T,T> {
 	}
 
 	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
 	protected Class<T> getClazz() {
 		return clazz;
 	}
 
-	@Override
-	protected DocumentMongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

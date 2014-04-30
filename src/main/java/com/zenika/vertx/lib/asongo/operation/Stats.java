@@ -31,13 +31,11 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
 public class Stats extends BasicThenTemplate<MongoStats> {
 
 	private final static MongoOperator OPERATOR = MongoOperator.DB_STATS;
-	private final static Logger LOGGER = LoggerFactory.getLogger(Stats.class);
 
 	private final String collection;
-	private final AsongoConfiguration configuration;
 
 	public Stats(AsongoConfiguration configuration, String collection) {
-		this.configuration = configuration;
+		super(OPERATOR, configuration);
 		this.collection = collection;
 	}
 
@@ -49,13 +47,4 @@ public class Stats extends BasicThenTemplate<MongoStats> {
 		return command;
 	}
 
-	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
-	protected MongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

@@ -30,19 +30,18 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
 public class Count extends BasicThenTemplate<Integer> {
 
 	private static final MongoOperator OPERATOR = MongoOperator.COUNT;
-	private static final Logger LOGGER = LoggerFactory.getLogger(Count.class);
 
-	private final AsongoConfiguration configuration;
 	private final String collection;
 	private final JsonObject query;
 
 	public Count(AsongoConfiguration configuration, String collection, JsonObject query) {
 
+		super(OPERATOR, configuration);
+
 		if (collection == null || collection.isEmpty()) {
 			throw new IllegalArgumentException("A collection is required");
 		}
 
-		this.configuration = configuration;
 		this.collection = collection;
 		this.query = query;
 	}
@@ -56,13 +55,4 @@ public class Count extends BasicThenTemplate<Integer> {
 		return command;
 	}
 
-	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
-	protected MongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

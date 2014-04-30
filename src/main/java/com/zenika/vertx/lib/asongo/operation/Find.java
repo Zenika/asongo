@@ -34,7 +34,6 @@ public class Find<T> extends DocumentThenTemplate<Collection<T>,T> {
 
 	private final String collection;
 	private final JsonObject query;
-	private final AsongoConfiguration configuration;
 
 	private JsonObject command = new JsonObject();
 	private JsonObject hint = new JsonObject();
@@ -45,11 +44,12 @@ public class Find<T> extends DocumentThenTemplate<Collection<T>,T> {
 
 	public Find(AsongoConfiguration configuration, String collection, JsonObject query) {
 
+		super(OPERATOR, configuration);
+
 		if (collection == null || collection.isEmpty()) {
 			throw new IllegalArgumentException("A collection is required");
 		}
 
-		this.configuration = configuration;
 		this.collection = collection;
 		this.query = query;
 	}
@@ -116,17 +116,8 @@ public class Find<T> extends DocumentThenTemplate<Collection<T>,T> {
 	}
 
 	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
 	protected Class<T> getClazz() {
 		return clazz;
 	}
 
-	@Override
-	protected DocumentMongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

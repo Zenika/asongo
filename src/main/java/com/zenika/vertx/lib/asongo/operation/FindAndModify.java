@@ -37,7 +37,6 @@ public class FindAndModify<T> extends DocumentThenTemplate<T,T> {
 
 	private final String collection;
 	private final JsonObject query;
-	private final AsongoConfiguration configuration;
 
 	private JsonObject newDocument = new JsonObject();
 	private JsonObject sort = new JsonObject();;
@@ -50,11 +49,11 @@ public class FindAndModify<T> extends DocumentThenTemplate<T,T> {
 
 	public FindAndModify(AsongoConfiguration configuration, String collection, JsonObject query) {
 
+		super(OPERATOR, configuration);
 		if (collection == null || collection.isEmpty()) {
 			throw new IllegalArgumentException("A collection is required");
 		}
 
-		this.configuration = configuration;
 		this.collection = collection;
 		this.query = query;
 	}
@@ -141,17 +140,8 @@ public class FindAndModify<T> extends DocumentThenTemplate<T,T> {
 	}
 
 	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
 	protected Class<T> getClazz() {
 		return clazz;
 	}
 
-	@Override
-	protected DocumentMongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

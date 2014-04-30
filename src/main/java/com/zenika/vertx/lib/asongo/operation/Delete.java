@@ -30,19 +30,17 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
 public class Delete extends BasicThenTemplate<Integer> {
 
 	private final static MongoOperator OPERATOR = MongoOperator.DELETE;
-	private final static Logger LOGGER = LoggerFactory.getLogger(Delete.class);
 
-	private final AsongoConfiguration configuration;
 	private final String collection;
 	private final JsonObject query;
 
 	public Delete(AsongoConfiguration configuration, String collection, JsonObject query) {
 
+		super(OPERATOR, configuration);
 		if (collection == null || collection.isEmpty()) {
 			throw new IllegalArgumentException("A collection is required");
 		}
 
-		this.configuration = configuration;
 		this.collection = collection;
 		this.query = query;
 	}
@@ -56,13 +54,4 @@ public class Delete extends BasicThenTemplate<Integer> {
 		return command;
 	}
 
-	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
-	protected MongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

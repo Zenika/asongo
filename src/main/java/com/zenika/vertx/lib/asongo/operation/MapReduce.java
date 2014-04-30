@@ -12,7 +12,6 @@ import javax.naming.OperationNotSupportedException;
  */
 public class MapReduce extends BasicThenTemplate<JsonObject> implements Reduce {
 	private final static MongoOperator OPERATOR = MongoOperator.MAP_REDUCE;
-	private final AsongoConfiguration configuration;
 	private final String collection;
 	private final String jsMap;
 
@@ -27,7 +26,7 @@ public class MapReduce extends BasicThenTemplate<JsonObject> implements Reduce {
 	private boolean verbose;
 
 	public MapReduce(AsongoConfiguration configuration,String collection, String jsMap) {
-		this.configuration = configuration;
+		super(OPERATOR, configuration);
 		this.jsMap = jsMap;
 		this.collection = collection;
 	}
@@ -98,7 +97,7 @@ public class MapReduce extends BasicThenTemplate<JsonObject> implements Reduce {
 		/*JsonObject command = new JsonObject();
 		JsonObject mapReduce = new JsonObject();
 
-		command.putString("action", OPERATOR.fieldName());
+		command.putString("action", operator.fieldName());
 		mapReduce.putString("mapReduce", collection);
 		mapReduce.putString("jsMap", jsMap);
 		mapReduce.putString("jsReduce", jsReduce);
@@ -118,13 +117,5 @@ public class MapReduce extends BasicThenTemplate<JsonObject> implements Reduce {
 		//return command;*/
 	}
 
-	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
 
-	@Override
-	protected MongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

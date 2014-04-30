@@ -38,11 +38,24 @@ public abstract class BasicThenTemplate<T> implements Then<T> {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(BasicThenTemplate.class);
 
+	protected final MongoOperator operator;
+	protected final AsongoConfiguration configuration;
+
+	protected BasicThenTemplate(MongoOperator operator, AsongoConfiguration configuration) {
+
+		if (operator == null || configuration == null) {
+			throw new IllegalArgumentException("An operator and a configuration is required");
+		}
+
+		this.operator = operator;
+		this.configuration = configuration;
+
+	}
+
 	@Override
 	public void then(final Handler<T> handler) {
 
 		final JsonObject command = getCommand();
-		final AsongoConfiguration configuration = getConfiguration();
 
 		if(LOGGER.isDebugEnabled())
 			LOGGER.debug("The command " + command + ", is send to " + configuration.getMongoPersistorAdress());
@@ -60,7 +73,7 @@ public abstract class BasicThenTemplate<T> implements Then<T> {
 					LOGGER.debug("The result is " + presult);
 
 				if (presult.isNotError()) {
-					handler.handle(getOperator().<T>getResult(presult));
+					handler.handle(operator.<T>getResult(presult));
 				} else {
 					String errorMsg = presult.getMessage();
 					LOGGER.error("Bad request to mongo " + errorMsg + " with the command " + command);
@@ -71,12 +84,6 @@ public abstract class BasicThenTemplate<T> implements Then<T> {
 		});
 	}
 
-	//TODO force the configuration and operator by a constructor in the aim to put less code in the Operator implementation
 	protected abstract JsonObject getCommand();
-
-	protected abstract AsongoConfiguration getConfiguration();
-
-	protected abstract MongoOperator getOperator();
-
 
 }

@@ -39,11 +39,23 @@ public abstract class DocumentThenTemplate<T,K> implements Then<T> {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(DocumentThenTemplate.class);
 
+	protected final DocumentMongoOperator operator;
+	protected final AsongoConfiguration configuration;
+
+	protected DocumentThenTemplate(DocumentMongoOperator operator, AsongoConfiguration configuration) {
+
+		if (operator == null || configuration == null) {
+			throw new IllegalArgumentException("An operator and a configuration is required");
+		}
+
+		this.operator = operator;
+		this.configuration = configuration;
+	}
+
 	@Override
 	public void then(final Handler<T> handler) {
 
 		final JsonObject command = getCommand();
-		final AsongoConfiguration configuration = getConfiguration();
 		final Class <K> clazz = getClazz();
 
 		if(LOGGER.isDebugEnabled())
@@ -62,7 +74,7 @@ public abstract class DocumentThenTemplate<T,K> implements Then<T> {
 					LOGGER.debug("The result is " + presult);
 
 				if (presult.isNotError()) {
-					handler.handle(getOperator().<T,K>getResult(presult));
+					handler.handle(operator.<T, K>getResult(presult));
 				} else {
 					String errorMsg = presult.getMessage();
 					LOGGER.error("Bad request to mongo " + errorMsg + " with the command " + command);
@@ -73,12 +85,8 @@ public abstract class DocumentThenTemplate<T,K> implements Then<T> {
 		});
 	}
 
-	//TODO see in BasicThenTemplate
 	protected abstract JsonObject getCommand();
-
-	protected abstract AsongoConfiguration getConfiguration();
 
 	protected abstract Class<K> getClazz();
 
-	protected abstract DocumentMongoOperator getOperator();
 }

@@ -31,14 +31,10 @@ import java.util.Collection;
  */
 public class GetCollections extends BasicThenTemplate<Collection<String>> {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(GetCollections.class);
 	private final static MongoOperator OPERATOR = MongoOperator.GET_COLLECTIONS;
 
-	private final AsongoConfiguration configuration;
-
-
 	public GetCollections(AsongoConfiguration configuration) {
-		this.configuration = configuration;
+		super(OPERATOR, configuration);
 	}
 
 	@Override
@@ -46,14 +42,4 @@ public class GetCollections extends BasicThenTemplate<Collection<String>> {
 		return new JsonObject().putString("action", OPERATOR.fieldName());
 	}
 
-	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-
-	@Override
-	protected MongoOperator getOperator() {
-		return OPERATOR;
-	}
 }

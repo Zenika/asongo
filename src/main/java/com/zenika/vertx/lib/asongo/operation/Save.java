@@ -29,22 +29,18 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
  */
 public class Save  extends BasicThenTemplate<String> {
 
-private static final Logger LOGGER = LoggerFactory.getLogger(Save.class);
-
 	private final static MongoOperator OPERATOR = MongoOperator.SAVE;
 
 	private final String collection;
 	private final JsonObject document;
-	private final AsongoConfiguration configuration;
-
 
 	public Save(AsongoConfiguration configuration, String collection, JsonObject document) {
 
+		super(OPERATOR, configuration);
 		if (collection == null || collection.isEmpty()) {
 			throw new IllegalArgumentException("A collection is required");
 		}
 
-		this.configuration = configuration;
 		this.collection = collection;
 		this.document = document;
 
@@ -59,16 +55,5 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Save.class);
 		command.putObject("document",document);
 		return command;
 	}
-
-	@Override
-	protected AsongoConfiguration getConfiguration() {
-		return configuration;
-	}
-
-	@Override
-	protected MongoOperator getOperator() {
-		return OPERATOR;
-	}
-
 
 }
