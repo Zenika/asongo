@@ -23,11 +23,9 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
 
 
 /**
- * TODO Fix this class by sending back a jsonObject
  * In the aim to handle the quote around string value
  * @author M. Labusquière
  */
-@Deprecated
 public class MatcherBuilder {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(MatcherBuilder.class);
@@ -39,9 +37,9 @@ public class MatcherBuilder {
 			throw new NullPointerException("Args can't be null");
 
 		for(String arg: args)	{
-			if(args == null)
+			if(arg == null)
 				throw new NullPointerException("An arg can't be null");
-			jsonMatcher = jsonMatcher.replaceFirst(DEFAULT_SYMBOL,arg);
+			jsonMatcher = jsonMatcher.replaceFirst(DEFAULT_SYMBOL,"\"" + arg + "\"");
 		}
 
 		if(jsonMatcher.contains(DEFAULT_SYMBOL))	{

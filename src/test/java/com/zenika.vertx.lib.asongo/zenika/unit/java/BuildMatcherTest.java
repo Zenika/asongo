@@ -19,6 +19,7 @@
 package com.zenika.vertx.lib.asongo.zenika.unit.java;
 
 import org.junit.Test;
+import org.vertx.java.core.json.JsonObject;
 
 import static com.zenika.vertx.lib.asongo.MatcherBuilder.getMatcher;
 import static org.junit.Assert.assertEquals;
@@ -30,7 +31,7 @@ public class BuildMatcherTest {
 
 	@Test
 	public void BuildMatcherTest() {
-		assertEquals(getMatcher("{org:#,compa:#}", "org", "compa"), "{org:org,compa:compa}");
+		assertEquals(getMatcher("{org:#,compa:#}", "org", "compa"), "{org:\"org\",compa:\"compa\"}");
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -43,8 +44,9 @@ public class BuildMatcherTest {
 		getMatcher("{org:#,compa:#}", "org", null);
 	}
 
-	public void quoteTest() {
-		getMatcher("{\"org\":#,\"compa\":#}", "org", "compa");
+	public void SerialisationTest() {
+		String matcher = getMatcher("{\"org\":#,\"compa\":#}", "org", "compa");
+		JsonObject jsonObject = new JsonObject(matcher);
 	}
 
 }
