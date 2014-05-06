@@ -50,14 +50,14 @@ public class DropSaveCountTest extends MongoVerticle {
 		deployFongoPersistorAndRemoveCollection(new Handler<Void>() {
 			@Override
 			public void handle(Void event) {
-				insertData(1,new Handler<String>() {
+				insertData(1, new Handler<String>() {
 					@Override
 					public void handle(String id) {
-						assertNotNull("The insertion is not working or we don't receive the id created by the persitor",id);
+						assertNotNull("The insertion is not working or we don't receive the id created by the persitor", id);
 						getAsongoTestCollection().count().then(new Handler<Integer>() {
 							@Override
 							public void handle(Integer documentNumber) {
-								assertTrue("The collection had not be dropped or the insertion is not working ("+ documentNumber + " documents)",documentNumber == 1);
+								assertTrue("The collection had not be dropped or the insertion is not working (" + documentNumber + " documents)", documentNumber == 1);
 								testComplete();
 							}
 						});

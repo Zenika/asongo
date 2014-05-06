@@ -49,13 +49,13 @@ public class GetCollectionsTest extends MongoVerticle {
 		deployFongoPersistorAndRemoveCollection(new Handler<Void>() {
 			@Override
 			public void handle(Void event) {
-				insertData(1,new Handler<String>() {
+				insertData(1, new Handler<String>() {
 					@Override
 					public void handle(String id) {
 						getAsongo().getCollections().then(new Handler<Collection<String>>() {
 							@Override
 							public void handle(Collection<String> collections) {
-								assertTrue("the insertion or the method getCollections is not working",collections.contains(ASONGO_TEST_COLLECTION));
+								assertTrue("the insertion or the method getCollections is not working", collections.contains(ASONGO_TEST_COLLECTION));
 								testComplete();
 							}
 						});

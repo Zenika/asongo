@@ -36,7 +36,7 @@ import java.util.Collection;
 /**
  * @author M. Labusquière
  */
-public class Find<T> extends DocumentThenTemplate<Collection<T>,T> {
+public class Find<T> extends DocumentThenTemplate<Collection<T>, T> {
 
 	private final static DocumentMongoOperator OPERATOR = DocumentMongoOperator.FIND;
 
@@ -48,7 +48,7 @@ public class Find<T> extends DocumentThenTemplate<Collection<T>,T> {
 	private JsonObject projection = new JsonObject();
 	private int skip = -1;
 	private int limit = -1;
-	private Class<T> clazz ;
+	private Class<T> clazz;
 
 	public Find(AsongoConfiguration configuration, String collection, JsonObject query) {
 
@@ -90,14 +90,14 @@ public class Find<T> extends DocumentThenTemplate<Collection<T>,T> {
 
 	public Find projection(String... projections) {
 		JsonObject jsonProjection = new JsonObject();
-		for(String projection :  projections)	{
-			jsonProjection.putNumber(projection,1);
+		for (String projection : projections) {
+			jsonProjection.putNumber(projection, 1);
 		}
 		this.projection = jsonProjection;
 		return this;
 	}
 
-	public Then as(Class clazz)	{
+	public Then as(Class clazz) {
 
 		if (collection == null || collection.isEmpty()) {
 			throw new IllegalArgumentException("A collection is required");
@@ -106,13 +106,13 @@ public class Find<T> extends DocumentThenTemplate<Collection<T>,T> {
 		command.putString("collection", collection);
 		command.putString("action", OPERATOR.fieldName());
 		command.putObject("matcher", query);
-		if(projection.size() != 0)
+		if (projection.size() != 0)
 			command.putObject("projection", projection);
-		if(skip > 0)
+		if (skip > 0)
 			command.putNumber("skip", skip);
-		if(limit > 0)
+		if (limit > 0)
 			command.putNumber("limit", limit);
-		if(hint.size() > 0)
+		if (hint.size() > 0)
 			command.putObject("hint", hint);
 		this.clazz = clazz;
 		return this;

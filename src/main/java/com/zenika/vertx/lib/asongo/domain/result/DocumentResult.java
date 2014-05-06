@@ -32,6 +32,7 @@ import java.util.Collection;
  * Result of operations with a generified type (not generic)
  * Used in the {@link com.zenika.vertx.lib.asongo.then.DocumentThenTemplate}
  * //TODO should discuss about 1 result type different 1 class different
+ *
  * @author M. Labusquière
  */
 public class DocumentResult<T> extends ErrorResult {

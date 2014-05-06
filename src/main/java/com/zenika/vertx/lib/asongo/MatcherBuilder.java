@@ -34,6 +34,7 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
  * Builder to make matcher and query
  * Only string are supported.
  * TODO improve it by supporting other types
+ *
  * @author M. Labusquière
  */
 public class MatcherBuilder {
@@ -43,16 +44,16 @@ public class MatcherBuilder {
 
 	public static String getMatcher(String jsonMatcher, String... args) {
 
-		if(args == null)
+		if (args == null)
 			throw new NullPointerException("Args can't be null");
 
-		for(String arg: args)	{
-			if(arg == null)
+		for (String arg : args) {
+			if (arg == null)
 				throw new NullPointerException("An arg can't be null");
-			jsonMatcher = jsonMatcher.replaceFirst(DEFAULT_SYMBOL,"\"" + arg + "\"");
+			jsonMatcher = jsonMatcher.replaceFirst(DEFAULT_SYMBOL, "\"" + arg + "\"");
 		}
 
-		if(jsonMatcher.contains(DEFAULT_SYMBOL))	{
+		if (jsonMatcher.contains(DEFAULT_SYMBOL)) {
 			LOGGER.error("We build a matcher still containing the symbol to replace");
 			throw new IllegalStateException("Not enought args to build the matcher");
 		}

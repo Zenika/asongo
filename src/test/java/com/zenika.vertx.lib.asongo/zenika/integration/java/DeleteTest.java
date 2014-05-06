@@ -46,14 +46,14 @@ public class DeleteTest extends MongoVerticle {
 		deployFongoPersistorAndRemoveCollection(new Handler<Void>() {
 			@Override
 			public void handle(Void event) {
-				insertData(1,new Handler<String>() {
+				insertData(1, new Handler<String>() {
 					@Override
 					public void handle(String id) {
-						assertNotNull("The insertion is not working or we don't receive the id created by the persitor",id);
-						getAsongoTestCollection().delete("{\"_id\":\""+id+"\"}").then(new Handler<Integer>() {
+						assertNotNull("The insertion is not working or we don't receive the id created by the persitor", id);
+						getAsongoTestCollection().delete("{\"_id\":\"" + id + "\"}").then(new Handler<Integer>() {
 							@Override
 							public void handle(Integer erasedDocumentNumber) {
-								assertEquals("The delete operation was not working",1,erasedDocumentNumber.intValue());
+								assertEquals("The delete operation was not working", 1, erasedDocumentNumber.intValue());
 								testComplete();
 							}
 						});

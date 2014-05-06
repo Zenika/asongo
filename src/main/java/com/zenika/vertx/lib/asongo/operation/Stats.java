@@ -30,8 +30,6 @@ import com.zenika.vertx.lib.asongo.AsongoConfiguration;
 import com.zenika.vertx.lib.asongo.domain.MongoStats;
 import com.zenika.vertx.lib.asongo.then.BasicThenTemplate;
 import org.vertx.java.core.json.JsonObject;
-import org.vertx.java.core.logging.Logger;
-import org.vertx.java.core.logging.impl.LoggerFactory;
 
 /**
  * @author M. Labusquière
@@ -48,10 +46,10 @@ public class Stats extends BasicThenTemplate<MongoStats> {
 	}
 
 	@Override
-	protected JsonObject getCommand()	{
+	protected JsonObject getCommand() {
 		JsonObject command = new JsonObject();
-		command.putString("action",OPERATOR.fieldName());
-		command.putString("collection",collection);
+		command.putString("action", OPERATOR.fieldName());
+		command.putString("collection", collection);
 		return command;
 	}
 

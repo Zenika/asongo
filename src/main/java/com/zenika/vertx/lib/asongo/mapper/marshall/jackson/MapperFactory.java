@@ -37,7 +37,7 @@ public class MapperFactory {
 	private static ObjectMapper mapper;
 
 	public static ObjectMapper getMapper() {
-		if(mapper != null)
+		if (mapper != null)
 			return mapper;
 
 		mapper = new ObjectMapper();

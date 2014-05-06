@@ -40,6 +40,7 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
 /**
  * This implementation is convenient for any determined return type
  * T is the return type
+ *
  * @author M. Labusquière
  */
 public abstract class BasicThenTemplate<T> implements Then<T> {
@@ -65,7 +66,7 @@ public abstract class BasicThenTemplate<T> implements Then<T> {
 
 		final JsonObject command = getCommand();
 
-		if(LOGGER.isDebugEnabled())
+		if (LOGGER.isDebugEnabled())
 			LOGGER.debug("The command " + command + ", is send to " + configuration.getMongoPersistorAdress());
 
 		configuration.getEventBus().send(configuration.getMongoPersistorAdress(), command, new Handler<Message<JsonObject>>() {
@@ -77,7 +78,7 @@ public abstract class BasicThenTemplate<T> implements Then<T> {
 
 				final PersistorResult presult = unmarshaller.unmarshall(message.body().toString(), PersistorResult.class);
 
-				if(LOGGER.isDebugEnabled())
+				if (LOGGER.isDebugEnabled())
 					LOGGER.debug("The result is " + presult);
 
 				if (presult.isNotError()) {

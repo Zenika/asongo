@@ -30,17 +30,18 @@ import java.util.Map;
 
 /**
  * Representation of a DB stats
+ *
  * @author M. Labusquière
  */
 public class MongoStats {
 
 	private String serverUsed;
 	private String ns;
-	private int	count;
+	private int count;
 	private int size;
 	private double avgObjSize;
 	private long storageSize;
-	private int	numExtents;
+	private int numExtents;
 	private int nindexes;
 	private int lastExtentSize;
 	private double paddingFactor;
@@ -48,7 +49,8 @@ public class MongoStats {
 	private long totalIndexSize;
 	private Map<String, Integer> indexSizes;
 
-	public MongoStats()	{}
+	public MongoStats() {
+	}
 
 	public String getServerUsed() {
 		return serverUsed;

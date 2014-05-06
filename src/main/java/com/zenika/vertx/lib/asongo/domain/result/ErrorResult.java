@@ -29,6 +29,7 @@ package com.zenika.vertx.lib.asongo.domain.result;
 /**
  * This class permits to get an error from the mongo persistor
  * Is the same contract for any operation
+ *
  * @author M. Labusquière
  */
 public abstract class ErrorResult {
@@ -59,7 +60,7 @@ public abstract class ErrorResult {
 
 
 	public boolean isNotError() {
-		if(status.equals("error"))
+		if (status.equals("error"))
 			return false;
 		return true;
 	}

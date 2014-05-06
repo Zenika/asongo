@@ -29,13 +29,11 @@ package com.zenika.vertx.lib.asongo.operation;
 import com.zenika.vertx.lib.asongo.AsongoConfiguration;
 import com.zenika.vertx.lib.asongo.then.BasicThenTemplate;
 import org.vertx.java.core.json.JsonObject;
-import org.vertx.java.core.logging.Logger;
-import org.vertx.java.core.logging.impl.LoggerFactory;
 
 /**
  * @author M. Labusquière
  */
-public class Save  extends BasicThenTemplate<String> {
+public class Save extends BasicThenTemplate<String> {
 
 	private final static MongoOperator OPERATOR = MongoOperator.SAVE;
 
@@ -60,7 +58,7 @@ public class Save  extends BasicThenTemplate<String> {
 
 		command.putString("collection", collection);
 		command.putString("action", OPERATOR.fieldName());
-		command.putObject("document",document);
+		command.putObject("document", document);
 		return command;
 	}
 

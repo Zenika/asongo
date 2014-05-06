@@ -37,7 +37,7 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
  */
 public class Command extends BasicThenTemplate<JsonObject> {
 
-private static final Logger LOGGER = LoggerFactory.getLogger(Command.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Command.class);
 
 	private final static MongoOperator OPERATOR = MongoOperator.COMMAND;
 	private final JsonObject command;
@@ -52,7 +52,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Command.class);
 	protected JsonObject getCommand() {
 		JsonObject command = new JsonObject();
 		command.putString("action", OPERATOR.fieldName());
-		command.putString("command",this.command.toString());
+		command.putString("command", this.command.toString());
 		return command;
 	}
 

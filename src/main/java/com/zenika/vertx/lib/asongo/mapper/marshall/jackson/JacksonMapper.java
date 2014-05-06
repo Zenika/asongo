@@ -29,9 +29,9 @@ package com.zenika.vertx.lib.asongo.mapper.marshall.jackson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zenika.vertx.lib.asongo.domain.result.DocumentResult;
 import com.zenika.vertx.lib.asongo.mapper.Mapper;
 import com.zenika.vertx.lib.asongo.mapper.marshall.Marshaller;
-import com.zenika.vertx.lib.asongo.domain.result.DocumentResult;
 import com.zenika.vertx.lib.asongo.mapper.marshall.Unmarshaller;
 import org.jongo.ObjectIdUpdater;
 import org.jongo.ReflectiveObjectIdUpdater;
@@ -70,7 +70,7 @@ public class JacksonMapper implements Mapper {
 			@Override
 			public <T> T unmarshall(String jsonDocument, Class<T> clazz) throws MarshallingException {
 
-				if(jsonDocument == null || jsonDocument.isEmpty() )
+				if (jsonDocument == null || jsonDocument.isEmpty())
 					return null;
 
 				try {
@@ -83,7 +83,7 @@ public class JacksonMapper implements Mapper {
 			@Override
 			public <T> T unmarshall(String jsonDocument, Class<T> clazz, Class... generic) throws MarshallingException {
 
-				if(jsonDocument == null || jsonDocument.isEmpty() )
+				if (jsonDocument == null || jsonDocument.isEmpty())
 					return null;
 
 				try {

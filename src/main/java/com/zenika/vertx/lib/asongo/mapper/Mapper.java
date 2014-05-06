@@ -33,6 +33,7 @@ import org.jongo.ObjectIdUpdater;
 /**
  * This interface should be implemented to override the default mapper
  * TODO make a builder to directly inject your own jackson mapper
+ *
  * @author M. Labusquière
  */
 public interface Mapper {

@@ -28,6 +28,7 @@ package com.zenika.vertx.lib.asongo.zenika.integration.java.model;
 
 /**
  * This class is only for test purpose
+ *
  * @author M. Labusquière
  */
 public class Model {

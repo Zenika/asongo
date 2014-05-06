@@ -33,5 +33,6 @@ import org.jongo.marshall.MarshallingException;
  */
 public interface Unmarshaller {
 	<T> T unmarshall(String jsonDocument, Class<T> clazz) throws MarshallingException;
+
 	<T> T unmarshall(String jsonDocument, Class<T> documentResultClass, Class... generics) throws MarshallingException;
 }

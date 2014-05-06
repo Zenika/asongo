@@ -34,19 +34,13 @@ import com.zenika.vertx.lib.asongo.domain.result.DocumentResult;
 public enum DocumentMongoOperator {
 	FIND("find") {
 		@Override
-		public <T,K> T getResult(DocumentResult<K> presult) {
+		public <T, K> T getResult(DocumentResult<K> presult) {
 			return (T) presult.getResults();
 		}
 	},
 	FINDONE("findone") {
 		@Override
-		public <T,K> T getResult(DocumentResult<K> presult) {
-			return (T) presult.getResult();
-		}
-	},
-	FIND_AND_MODIFY("find_and_modify") {
-		@Override
-		public <T,K> T getResult(DocumentResult<K> presult) {
+		public <T, K> T getResult(DocumentResult<K> presult) {
 			return (T) presult.getResult();
 		}
 	};
@@ -54,12 +48,12 @@ public enum DocumentMongoOperator {
 	private final String operator;
 
 	private DocumentMongoOperator(String operator) {
-			this.operator = operator;
+		this.operator = operator;
 	}
 
 	public String fieldName() {
 		return operator;
 	}
 
-	public abstract <T,K> T getResult(DocumentResult<K> presult);
+	public abstract <T, K> T getResult(DocumentResult<K> presult);
 }

@@ -53,10 +53,10 @@ public class FindTest extends MongoVerticle {
 		deployFongoPersistorAndRemoveCollection(new Handler<Void>() {
 			@Override
 			public void handle(Void event) {
-				insertData(3,new Handler<String>() {
+				insertData(3, new Handler<String>() {
 					@Override
 					public void handle(String id) {
-						assertNotNull("The insertion is not working or we don't receive the id created by the persitor",id);
+						assertNotNull("The insertion is not working or we don't receive the id created by the persitor", id);
 						getAsongoTestCollection().find("{}").as(Model.class).then(new Handler<Collection<Model>>() {
 							@Override
 							public void handle(Collection<Model> models) {

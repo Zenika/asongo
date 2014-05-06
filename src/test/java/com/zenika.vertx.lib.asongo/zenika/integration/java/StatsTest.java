@@ -52,17 +52,17 @@ public class StatsTest extends MongoVerticle {
 		deployFongoPersistorAndRemoveCollection(new Handler<Void>() {
 			@Override
 			public void handle(Void event) {
-				insertData(1,new Handler<String>() {
+				insertData(1, new Handler<String>() {
 					@Override
 					public void handle(String id) {
-					assertNotNull("The insertion is not working or we don't receive the id created by the persitor",id);
-					getAsongoTestCollection().getCollectionStats().then(new Handler<MongoStats>() {
-						@Override
-						public void handle(MongoStats stats) {
-							assertNotNull("The operator stats is not working",stats);
-							testComplete();
-						}
-					});
+						assertNotNull("The insertion is not working or we don't receive the id created by the persitor", id);
+						getAsongoTestCollection().getCollectionStats().then(new Handler<MongoStats>() {
+							@Override
+							public void handle(MongoStats stats) {
+								assertNotNull("The operator stats is not working", stats);
+								testComplete();
+							}
+						});
 					}
 				});
 			}

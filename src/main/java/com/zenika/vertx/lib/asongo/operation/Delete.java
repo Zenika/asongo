@@ -29,8 +29,6 @@ package com.zenika.vertx.lib.asongo.operation;
 import com.zenika.vertx.lib.asongo.AsongoConfiguration;
 import com.zenika.vertx.lib.asongo.then.BasicThenTemplate;
 import org.vertx.java.core.json.JsonObject;
-import org.vertx.java.core.logging.Logger;
-import org.vertx.java.core.logging.impl.LoggerFactory;
 
 /**
  * @author M. Labusquière
@@ -57,8 +55,8 @@ public class Delete extends BasicThenTemplate<Integer> {
 	protected JsonObject getCommand() {
 		JsonObject command = new JsonObject();
 		command.putString("action", OPERATOR.fieldName());
-		command.putString("collection",collection);
-		command.putObject("matcher",query);
+		command.putString("collection", collection);
+		command.putObject("matcher", query);
 		return command;
 	}
 

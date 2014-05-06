@@ -37,6 +37,7 @@ import java.util.HashMap;
  * Result of operations with a predefined type (not generic)
  * Used in the {@link com.zenika.vertx.lib.asongo.then.BasicThenTemplate}
  * //TODO should discuss about 1 result type different 1 class different
+ *
  * @author M. Labusquière
  */
 public class PersistorResult extends ErrorResult {

@@ -32,6 +32,7 @@ import org.vertx.java.core.Handler;
  * A template to make operation easier to create
  * It will be these method we made the call to the mongo persistor
  * T is the return type of the Mongo Persistor dependant of the operation type.
+ *
  * @author M. Labusquière
  */
 public interface Then<T> {

@@ -34,7 +34,7 @@ import org.vertx.java.core.json.JsonObject;
 /**
  * @author M. Labusquière
  */
-public class FindOne<T> extends DocumentThenTemplate<T,T> {
+public class FindOne<T> extends DocumentThenTemplate<T, T> {
 
 	private final static DocumentMongoOperator OPERATOR = DocumentMongoOperator.FINDONE;
 
@@ -61,7 +61,7 @@ public class FindOne<T> extends DocumentThenTemplate<T,T> {
 		return this;
 	}
 
-	public Then as(Class clazz)	{
+	public Then as(Class clazz) {
 		this.clazz = clazz;
 		return this;
 	}
@@ -78,8 +78,8 @@ public class FindOne<T> extends DocumentThenTemplate<T,T> {
 		command.putString("collection", collection);
 		command.putString("action", OPERATOR.fieldName());
 		command.putObject("matcher", query);
-		if(projection.size() != 0)
-			command.putObject("projection",projection);
+		if (projection.size() != 0)
+			command.putObject("projection", projection);
 		return command;
 	}
 

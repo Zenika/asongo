@@ -32,6 +32,7 @@ import com.zenika.vertx.lib.asongo.domain.result.PersistorResult;
  * This class link the operation with this return type
  * And method call on the result.
  * It also hold the key world for the field action.
+ *
  * @author M. Labusquière
  */
 public enum MongoOperator {
@@ -87,7 +88,7 @@ public enum MongoOperator {
 	/**
 	 * Since the mongo persistor is not supporting Map Reduce we use command
 	 */
- 	MAP_REDUCE("command") {
+	MAP_REDUCE("command") {
 		@Override
 		public <T> T getResult(PersistorResult presult) {
 			return (T) presult.getResultCommand();
@@ -97,12 +98,12 @@ public enum MongoOperator {
 	private final String operator;
 
 	private MongoOperator(String operator) {
-			this.operator = operator;
+		this.operator = operator;
 	}
 
 	public String fieldName() {
 		return operator;
 	}
-	
+
 	public abstract <T> T getResult(PersistorResult presult);
 }

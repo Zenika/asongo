@@ -33,6 +33,7 @@ import org.vertx.java.core.eventbus.EventBus;
 
 /**
  * Holder for the configuration
+ *
  * @author M. Labusquière
  */
 public class AsongoConfiguration {
@@ -44,18 +45,18 @@ public class AsongoConfiguration {
 	private final String mongoPersistorAdress;
 
 	AsongoConfiguration(EventBus eventBus) {
-		this(eventBus,new JacksonMapper(),MONGO_PERSISTOR_ADRESS);
+		this(eventBus, new JacksonMapper(), MONGO_PERSISTOR_ADRESS);
 	}
 
 	AsongoConfiguration(EventBus eventBus, String mongoPersistorAdress) {
-		this(eventBus,new JacksonMapper(),mongoPersistorAdress);
+		this(eventBus, new JacksonMapper(), mongoPersistorAdress);
 	}
 
 	AsongoConfiguration(EventBus eventBus, Mapper mapper) {
-		this(eventBus,mapper,MONGO_PERSISTOR_ADRESS);
+		this(eventBus, mapper, MONGO_PERSISTOR_ADRESS);
 	}
 
-	AsongoConfiguration(EventBus eventBus,Mapper mapper,String mongoPersistorAdress) {
+	AsongoConfiguration(EventBus eventBus, Mapper mapper, String mongoPersistorAdress) {
 		this.eventBus = eventBus;
 		this.mapper = mapper;
 		this.mongoPersistorAdress = mongoPersistorAdress;

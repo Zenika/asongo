@@ -58,7 +58,7 @@ public class Update extends BasicThenTemplate<Void> {
 		this.query = query;
 	}
 
-	public Update with(String newJsonDocument)	{
+	public Update with(String newJsonDocument) {
 		return with(new JsonObject(newJsonDocument));
 	}
 
@@ -67,12 +67,12 @@ public class Update extends BasicThenTemplate<Void> {
 		return this;
 	}
 
-	public Update upsert(boolean upsert)	{
+	public Update upsert(boolean upsert) {
 		this.upsert = upsert;
 		return this;
 	}
 
-	public Update multi(boolean multi)	{
+	public Update multi(boolean multi) {
 		this.multi = multi;
 		return this;
 	}
@@ -80,16 +80,16 @@ public class Update extends BasicThenTemplate<Void> {
 	@Override
 	protected JsonObject getCommand() {
 
-		if(collection == null || collection.isEmpty())
+		if (collection == null || collection.isEmpty())
 			throw new IllegalArgumentException("A collection is required");
 
 		JsonObject command = new JsonObject();
 		command.putString("action", OPERATOR.fieldName());
-		command.putString("collection",collection);
+		command.putString("collection", collection);
 		command.putObject("criteria", query);
 		command.putObject("objNew", newDocument);
 		command.putBoolean("upsert", upsert);
-		command.putBoolean("multi",multi);
+		command.putBoolean("multi", multi);
 
 		return command;
 	}

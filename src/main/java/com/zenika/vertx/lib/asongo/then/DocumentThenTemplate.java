@@ -28,9 +28,9 @@ package com.zenika.vertx.lib.asongo.then;
 
 import com.mongodb.MongoException;
 import com.zenika.vertx.lib.asongo.AsongoConfiguration;
-import com.zenika.vertx.lib.asongo.operation.DocumentMongoOperator;
 import com.zenika.vertx.lib.asongo.domain.result.DocumentResult;
 import com.zenika.vertx.lib.asongo.mapper.marshall.Unmarshaller;
+import com.zenika.vertx.lib.asongo.operation.DocumentMongoOperator;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.eventbus.Message;
 import org.vertx.java.core.json.JsonObject;
@@ -41,9 +41,10 @@ import org.vertx.java.core.logging.impl.LoggerFactory;
  * This implementation is convenient for any generified return type
  * T is the return type
  * K is the type of document
+ *
  * @author M. Labusquière
  */
-public abstract class DocumentThenTemplate<T,K> implements Then<T> {
+public abstract class DocumentThenTemplate<T, K> implements Then<T> {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(DocumentThenTemplate.class);
 
@@ -64,9 +65,9 @@ public abstract class DocumentThenTemplate<T,K> implements Then<T> {
 	public void then(final Handler<T> handler) {
 
 		final JsonObject command = getCommand();
-		final Class <K> clazz = getClazz();
+		final Class<K> clazz = getClazz();
 
-		if(LOGGER.isDebugEnabled())
+		if (LOGGER.isDebugEnabled())
 			LOGGER.debug("The command " + command + ", is send to " + configuration.getMongoPersistorAdress());
 
 		configuration.getEventBus().send(configuration.getMongoPersistorAdress(), command, new Handler<Message<JsonObject>>() {
@@ -78,7 +79,7 @@ public abstract class DocumentThenTemplate<T,K> implements Then<T> {
 
 				final DocumentResult<K> presult = unmarshaller.unmarshall(message.body().toString(), DocumentResult.class, clazz);
 
-				if(LOGGER.isDebugEnabled())
+				if (LOGGER.isDebugEnabled())
 					LOGGER.debug("The result is " + presult);
 
 				if (presult.isNotError()) {

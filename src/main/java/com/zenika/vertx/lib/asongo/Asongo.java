@@ -27,26 +27,27 @@
 package com.zenika.vertx.lib.asongo;
 
 import com.zenika.vertx.lib.asongo.mapper.Mapper;
+import com.zenika.vertx.lib.asongo.operation.Command;
 import com.zenika.vertx.lib.asongo.operation.DropCollection;
 import com.zenika.vertx.lib.asongo.operation.GetCollections;
-import com.zenika.vertx.lib.asongo.operation.Command;
 import org.vertx.java.core.eventbus.EventBus;
 import org.vertx.java.core.json.JsonObject;
 
 /**
  * Initialise a configuration and offer operations on database
+ *
  * @author M. Labusquière
  */
 public class Asongo {
 
 	private AsongoConfiguration configuration;
 
-	public Asongo(EventBus eventBus)	{
+	public Asongo(EventBus eventBus) {
 		this(new AsongoConfiguration(eventBus));
 	}
 
-	public Asongo(EventBus eventBus,Mapper mapper)	{
-		this(new AsongoConfiguration(eventBus,mapper));
+	public Asongo(EventBus eventBus, Mapper mapper) {
+		this(new AsongoConfiguration(eventBus, mapper));
 	}
 
 	private Asongo(AsongoConfiguration configuration) {
@@ -54,27 +55,27 @@ public class Asongo {
 	}
 
 	public final AsongoCollection getCollection(String collection) {
-		return new AsongoCollection(configuration,collection);
+		return new AsongoCollection(configuration, collection);
 	}
 
-	public GetCollections getCollections()	{
+	public GetCollections getCollections() {
 		return new GetCollections(configuration);
 	}
 
-	public Command execute(JsonObject command)	{
-		return new Command(configuration,command);
+	public Command execute(JsonObject command) {
+		return new Command(configuration, command);
 	}
 
-	public Command execute(String command)	{
+	public Command execute(String command) {
 		return execute(new JsonObject(command));
 	}
 
-	public Command execute(String command, String... args)	{
-		return execute(MatcherBuilder.getMatcher(command,args));
+	public Command execute(String command, String... args) {
+		return execute(MatcherBuilder.getMatcher(command, args));
 	}
 
-	public DropCollection dropCollection(String collection)	{
-		return new DropCollection(configuration,collection);
+	public DropCollection dropCollection(String collection) {
+		return new DropCollection(configuration, collection);
 	}
 
 }
